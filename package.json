@@ -24,6 +24,7 @@
   "dependencies": {
     "@gitborlando/utils": "^1.7.0",
     "@gitborlando/widget": "^1.0.1",
+    "class-autobind-decorator": "^3.0.1",
     "mobx": "^6.13.7",
     "mobx-react": "^9.2.0",
     "react": "^19.1.0",
@@ -38,6 +39,7 @@
     "@unocss/preset-rem-to-px": "^66.3.3",
     "@vitejs/plugin-react-swc": "^3.11.0",
     "husky": "^9.1.7",
+    "less": "^4.4.0",
     "pretty-quick": "^4.2.2",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
