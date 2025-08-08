@@ -1,7 +1,11 @@
 import { Axios$ } from 'src/service/axios'
 
 export interface GithubItem extends Item {
-  path: string
+  type: 'blob'
+}
+
+export interface GithubDir extends Item {
+  type: 'tree'
 }
 
 class GithubService {
@@ -18,10 +22,6 @@ class GithubService {
     return `https://api.github.com`
   }
 
-  repoApi(path: string) {
-    return `/repos/${this.owner}/${this.repo}${path}`
-  }
-
   setup() {
     Axios$.setupAxios(this.baseUrl, {
       request: (config) => {
@@ -36,6 +36,20 @@ class GithubService {
   async getUser() {
     const [res, err] = await to(Axios$.get('/user'))
     return res
+  }
+
+  async getContent(path: string) {
+    const [res, err] = await to(Axios$.get(this.repoApi(path)))
+    return res
+  }
+
+  async deleteContent(path: string) {
+    const [res, err] = await to(Axios$.post(this.repoApi(path), {}))
+    return res
+  }
+
+  private repoApi(path: string) {
+    return `/repos/${this.owner}/${this.repo}${path}`
   }
 }
 

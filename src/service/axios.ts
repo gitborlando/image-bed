@@ -17,10 +17,11 @@ type AxiosInterceptors = {
 class AxiosService {
   instance = AXIOS.create({ timeout: 30000 })
 
-  baseURL = ''
+  private baseURL = ''
 
-  requestInterceptors: AxiosInterceptors['request'] = (config) => config
-  responseInterceptors: AxiosInterceptors['response'] = (response) => response
+  private requestInterceptors: AxiosInterceptors['request'] = (config) => config
+  private responseInterceptors: AxiosInterceptors['response'] = (response) =>
+    response
 
   constructor() {
     makeAutoObservable(this)
@@ -52,6 +53,14 @@ class AxiosService {
     })
   }
 
+  put<T = any>(url: string, data: any) {
+    return this.request<T>({
+      url,
+      method: 'PUT',
+      data,
+    })
+  }
+
   private async request<T = any>(config: CustomAxiosRequestConfig) {
     const { noCache = true } = config
 
@@ -62,11 +71,12 @@ class AxiosService {
       delete config.noCache
     }
 
-    try {
-      return await this.instance.request<T>(config)
-    } catch (error) {
-      console.log('error')
+    const [res, err] = await to(this.instance.request<T>(config))
+    if (err) {
+      console.log(err)
     }
+
+    return res
   }
 
   private autoConfig() {

@@ -1,5 +1,5 @@
 import { jsonFy, jsonParse, matchCase } from '@gitborlando/utils'
-import { Github } from 'src/service/github'
+import { Github } from 'src/service/services/github'
 
 export interface Setting {
   service: 'github'

@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { App } from './view/app'
 
-import { Github } from 'src/service/github'
+import { Github } from 'src/service/services/github'
 import 'src/view/style/index.less'
 
 Github.setup()
