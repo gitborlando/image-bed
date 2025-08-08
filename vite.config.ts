@@ -8,9 +8,11 @@ const autoImport = autoImportPlugin({
   include: [/\.[tj]sx?$/],
   imports: [
     'react',
+    'mobx',
     {
       'src/assets/assets': ['Assets'],
       '@gitborlando/widget': ['Flex', 'Icon'],
+      'src/utils/await-to': ['to'],
     },
   ],
 })
@@ -28,7 +30,7 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       less: {
-        additionalData: `@import "src/style/mixin.less";`,
+        additionalData: `@import "src/view/style/mixin.less";`,
         javascriptEnabled: true,
       },
     },

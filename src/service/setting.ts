@@ -1,0 +1,59 @@
+import { jsonFy, jsonParse, matchCase } from '@gitborlando/utils'
+import { Github } from 'src/service/github'
+
+export interface Setting {
+  service: 'github'
+  isLogin: boolean
+  compress: 'webp' | 'jpeg' | ''
+  itemZoom: number
+}
+
+class SettingService {
+  setting = {
+    service: 'github',
+    isLogin: false,
+    compress: 'webp',
+    itemZoom: 1,
+  }
+
+  constructor() {
+    makeAutoObservable(this)
+
+    const setting = localStorage.getItem('setting')
+    if (setting) {
+      this.setting ||= jsonParse(setting)
+    }
+
+    this.autoConfigService()
+  }
+
+  private autoConfigService() {
+    this.autoConfig('service', (value) => {
+      this.setting.isLogin = false
+
+      matchCase(value, {
+        github: () => {
+          Github.setup()
+        },
+      })
+    })
+  }
+
+  private autoConfig<K extends keyof Setting>(
+    key: K,
+    callback?: (value: Setting[K]) => void,
+  ) {
+    reaction(
+      () => this.setting[key] as Setting[K],
+      (newValue, oldValue) => {
+        if (newValue !== oldValue) {
+          this.setting[key] = newValue
+          callback?.(newValue)
+        }
+        localStorage.setItem('setting', jsonFy(this.setting)!)
+      },
+    )
+  }
+}
+
+export const Setting = new SettingService()

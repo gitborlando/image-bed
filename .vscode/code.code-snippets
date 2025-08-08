@@ -30,11 +30,9 @@
   "Service": {
     "prefix": "service",
     "body": [
-      "import autobind from 'class-autobind-decorator'",
-      "",
-      "@autobind",
       "class $1${TM_FILENAME_BASE}Service {",
       "  constructor() {",
+      "    makeAutoObservable(this)",
       "  }",
       "}",
       "",

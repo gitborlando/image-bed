@@ -22,8 +22,9 @@
     "jsxSingleQuote": true
   },
   "dependencies": {
-    "@gitborlando/utils": "^1.7.0",
+    "@gitborlando/utils": "^3.1.0",
     "@gitborlando/widget": "^1.0.2",
+    "axios": "^1.11.0",
     "class-autobind-decorator": "^3.0.1",
     "mobx": "^6.13.7",
     "mobx-react": "^9.2.0",
