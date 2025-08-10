@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["autobind", "autorun", "unocss", "unplugin"]
+  "cSpell.words": ["autobind", "autorun", "unocss", "unplugin", "vshow"],
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

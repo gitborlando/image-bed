@@ -9,10 +9,12 @@ const autoImport = autoImportPlugin({
   imports: [
     'react',
     'mobx',
+    'mobx-react-lite',
     {
       'src/assets/assets': ['Assets'],
       '@gitborlando/widget': ['Flex', 'Icon'],
       'src/utils/await-to': ['to'],
+      'src/service/adaptor': ['Adaptor'],
     },
   ],
 })
@@ -34,5 +36,10 @@ export default defineConfig({
         javascriptEnabled: true,
       },
     },
+  },
+
+  server: {
+    port: 3000,
+    host: '0.0.0.0',
   },
 })

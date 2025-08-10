@@ -24,7 +24,10 @@ class AxiosService {
     response
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {
+      instance: false,
+    })
+
     this.autoConfig()
   }
 

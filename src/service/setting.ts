@@ -16,12 +16,17 @@ class SettingService {
     itemZoom: 1,
   }
 
+  get itemZoom() {
+    return this.setting.itemZoom
+  }
+
   constructor() {
     makeAutoObservable(this)
 
     const setting = localStorage.getItem('setting')
     if (setting) {
-      this.setting ||= jsonParse(setting)
+      const res = jsonParse(setting)
+      if (res) this.setting = res
     }
 
     this.autoConfigService()

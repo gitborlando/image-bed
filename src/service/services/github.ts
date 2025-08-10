@@ -8,7 +8,7 @@ export interface GithubDir extends Item {
   type: 'tree'
 }
 
-class GithubService {
+class GithubService implements Service {
   token = ''
   owner = ''
   repo = ''
@@ -50,6 +50,20 @@ class GithubService {
 
   private repoApi(path: string) {
     return `/repos/${this.owner}/${this.repo}${path}`
+  }
+
+  async loadInfo() {
+    const [res, err] = await to(fetch('data.json'))
+    if (err) return
+    return await res!.json()
+  }
+
+  async addItem(item: Item) {
+    return item
+  }
+
+  async removeItem(item: Item) {
+    return item
   }
 }
 

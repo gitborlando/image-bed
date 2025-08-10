@@ -1,0 +1,55 @@
+.Item {
+  overflow: hidden;
+  transition: all 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+  border-radius: @sp-lg;
+
+  &[data-visible='true'] {
+    opacity: 1;
+  }
+  &[data-visible='false'] {
+    opacity: 0;
+  }
+
+  & .image-comp {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &[data-hover='true'] {
+        transform: scale(1.1);
+      }
+      &[data-hover='false'] {
+        transform: scale(1);
+      }
+    }
+  }
+
+  &-icons {
+    position: absolute;
+    right: @sp-md;
+    top: @sp-md;
+    .fit-content;
+    gap: @sp-mini;
+    padding: @sp-sm;
+    background-color: white;
+    backdrop-filter: blur(30px);
+    opacity: 0.8;
+    .radius;
+    .pointer;
+
+    &:active {
+      opacity: 1;
+    }
+
+    &-delete {
+      color: red;
+    }
+  }
+}

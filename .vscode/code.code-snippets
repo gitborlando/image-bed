@@ -12,7 +12,7 @@
       "import { FC } from 'react'",
       "import { observer } from 'mobx-react'",
       "",
-      "export const $1${TM_FILENAME_BASE}Comp: FC<{}> = observer(({}) => {",
+      "export const ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Comp: FC<{}> = observer(({}) => {",
       "  return <Flex layout=''></Flex>",
       "})",
     ],
@@ -40,5 +40,11 @@
       "",
     ],
     "description": "Service",
+  },
+  "useState": {
+    "prefix": "usestate",
+    "scope": "typescriptreact",
+    "body": ["const [$1, set$1] = useState()"],
+    "description": "useState",
   },
 }
