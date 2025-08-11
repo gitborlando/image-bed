@@ -41,11 +41,12 @@ class AxiosService {
     }
   }
 
-  post<T = any>(url: string, data: any) {
+  post<T = any>(url: string, data: any, config?: AxiosRequestConfig) {
     return this.request<T>({
       url,
       method: 'POST',
       data,
+      ...config,
     })
   }
 

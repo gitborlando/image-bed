@@ -15,11 +15,11 @@ export const Table: FC<TableProps> = observer(() => {
   const [tableWidth, setTableWidth] = useState(0)
   const itemWidth = useMemo(() => {
     if (tableWidth <= 0) return 0
-    return (tableWidth - (count + 1) * 8) / count
+    return (tableWidth - (count + 1) * 2) / count
   }, [tableWidth])
 
   const imageQueues = useMemo(() => {
-    const imageQueues = range(count).map(() => [] as ImageObject[])
+    const imageQueues = range(count).map(() => [] as ImageItem[])
     const imageQueueHeights = range(count).map(() => 0)
 
     if (tableWidth <= 0) return imageQueues

@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Adaptor } from 'src/service/adaptor'
 import { suspend } from 'suspend-react'
 import { Table } from './components/table'

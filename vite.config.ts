@@ -14,7 +14,11 @@ const autoImport = autoImportPlugin({
       'src/assets/assets': ['Assets'],
       '@gitborlando/widget': ['Flex', 'Icon'],
       'src/utils/await-to': ['to'],
-      'src/service/adaptor': ['Adaptor'],
+    },
+    {
+      from: 'react',
+      imports: ['FC'],
+      type: true,
     },
   ],
 })

@@ -6,12 +6,14 @@ import { configure } from 'mobx'
 import { createRoot } from 'react-dom/client'
 import { Adaptor } from 'src/service/adaptor'
 import { Github } from 'src/service/services/github'
+import { Tencent } from 'src/service/services/tencent'
 import { App } from './view/app'
 
 configure({ enforceActions: 'never' })
 
-Adaptor.use('github', Github)
-Adaptor.setService('github')
+Adaptor.install(Github)
+Adaptor.install(Tencent)
+Adaptor.use(Tencent)
 
 const root = createRoot(document.getElementById('root')!)
 root.render(withSuspense(<App />, <h1>loading...</h1>))

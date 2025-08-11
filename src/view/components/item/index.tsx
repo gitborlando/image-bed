@@ -1,6 +1,7 @@
 import { matchCase } from '@gitborlando/utils'
 import { useHTMLElement } from '@gitborlando/utils/react'
 import { createContext, FC } from 'react'
+import { Adaptor } from 'src/service/adaptor'
 import { getTypeFromUrl } from 'src/utils/common'
 import { useVisible } from 'src/view/hooks/visible'
 import './index.less'
@@ -24,20 +25,20 @@ export const Item: FC<ItemProps> = observer(({ width, item }) => {
       layout='c'
       className='Item'
       style={{ width, height: width / item.ratio }}
-      data-visible={visible.toString()}
+      //   data-visible={visible.toString()}
       onHover={(h) => setIsHover(h)}>
       <Context.Provider value={isHover}>
         {matchCase(type, {
-          image: <ImageComp url={item.name} visible={visible} />,
-          text: <></>,
-          tree: <></>,
+          image: <ImageComp url={Adaptor.getItemUrl(item.id)} visible={visible} />,
+          text: <div>{item?.name}</div>,
+          tree: <div>{item?.name}</div>,
         })}
       </Context.Provider>
       <Flex vif={isHover} layout='h' className='Item-icons'>
         <Icon
           url={Assets.trash}
           className='delete'
-          onClick={() => Adaptor.removeItem(item)}
+          onClick={() => item && Adaptor.removeItem(item)}
         />
       </Flex>
     </Flex>

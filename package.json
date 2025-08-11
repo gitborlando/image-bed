@@ -6,9 +6,10 @@
     "prepare": "npx husky",
     "dev": "vite",
     "build": "vite build",
-    "clean": "rm -rf node_modules pnpm-lock.yaml && pnpm install",
+    "clean": "rm -rf node_modules pnpm-lock.yaml",
     "gen:assets": "npx tsx scripts/gen-assets.ts",
-    "gen:comp": "npx tsx scripts/gen-comp.ts"
+    "gen:comp": "npx tsx scripts/gen-comp.ts",
+    "server": "tsx watch server.ts"
   },
   "keywords": [],
   "author": "",
@@ -23,11 +24,16 @@
     "jsxSingleQuote": true
   },
   "dependencies": {
+    "@fastify/cors": "^11.1.0",
+    "@fastify/multipart": "^9.0.3",
     "@g-signal/core": "^1.0.0",
     "@g-signal/react": "^1.0.1",
     "@gitborlando/utils": "^4.0.0",
     "@gitborlando/widget": "^1.0.2",
     "axios": "^1.11.0",
+    "cos-js-sdk-v5": "^1.10.1",
+    "fast-average-color": "^9.5.0",
+    "fastify": "^5.5.0",
     "g-signal": "^1.0.0",
     "image-size": "^2.0.2",
     "immer": "^10.1.1",

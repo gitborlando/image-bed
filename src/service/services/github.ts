@@ -1,14 +1,10 @@
+import { nanoid } from '@gitborlando/utils'
 import { Axios$ } from 'src/service/axios'
-
-export interface GithubItem extends Item {
-  type: 'blob'
-}
-
-export interface GithubDir extends Item {
-  type: 'tree'
-}
+import { getTimePrefix } from 'src/utils/common'
 
 class GithubService implements Service {
+  readonly name = 'github'
+
   token = ''
   owner = ''
   repo = ''
@@ -19,7 +15,7 @@ class GithubService implements Service {
   }
 
   get baseUrl() {
-    return `https://api.github.com`
+    return 'http://localhost:3000' //`https://api.github.com`
   }
 
   setup() {
@@ -58,12 +54,31 @@ class GithubService implements Service {
     return await res!.json()
   }
 
-  async addItem(item: Item) {
-    return item
+  async updateInfo(info: InfoJson) {
+    const [res, err] = await to(Axios$.post(this.repoApi('/info'), info))
   }
 
-  async removeItem(item: Item) {
-    return item
+  createBaseItem(name: string) {
+    const timePrefix = getTimePrefix()
+    const id = nanoid(10)
+    return { name, id, timePrefix }
+  }
+
+  getItemUrl(id: string) {
+    return `https://github.com/${this.owner}/${this.repo}/blob/${this.branch}/${id}`
+  }
+
+  async uploadFile(name: string, id: string, file: File) {
+    const formData = new FormData()
+    formData.append('file', file)
+    formData.append('id', id)
+    formData.append('name', name)
+
+    const [res, err] = await to(Axios$.post('/upload', formData))
+  }
+
+  async removeFile(id: string) {
+    const [res, err] = await to(Axios$.post(this.repoApi('/delete'), { id }))
   }
 }
 
